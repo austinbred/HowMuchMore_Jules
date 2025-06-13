@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from .database import engine, Base
 
 # Import routers from the endpoints package using their exported names
+
 from .api.endpoints import ( # Using parentheses for multi-line import
     user_router,
     expense_router,
@@ -29,5 +30,7 @@ async def read_root():
 app.include_router(user_router, prefix="/user", tags=["user"])
 app.include_router(expense_router, prefix="/user/expenses", tags=["expenses"])
 app.include_router(saving_router, prefix="/user/savings", tags=["savings"])
+
 app.include_router(assumption_router, prefix="/user/assumptions", tags=["assumptions"])
 app.include_router(projection_router, prefix="/user/projections", tags=["projections"]) # Added projection_router
+
