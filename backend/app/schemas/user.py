@@ -3,8 +3,10 @@ from typing import Optional
 
 class UserBase(BaseModel):
     email: EmailStr
-    google_id: str # Added google_id
-    age: Optional[int] = None
+
+    google_id: str
+    age: int # Changed to required
+
     start_year: Optional[int] = None
 
 class UserCreate(UserBase):
