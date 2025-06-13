@@ -1,5 +1,8 @@
-from sqlalchemy import Column, Integer, String, Boolean # Removed Float as it's not used
+from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy.orm import relationship # Ensure this is imported
 from ..database import Base
+# If Expense model is in a separate file and User needs to know about it for type hinting (optional but good practice)
+# from .expense import Expense # This might cause circular import if not handled carefully, usually relationship string name is enough
 
 class User(Base):
     __tablename__ = "users"
@@ -13,7 +16,11 @@ class User(Base):
 
     is_active = Column(Boolean, default=True)
 
-    # Relationships (placeholders for now, will be defined later)
-    # expenses = relationship("Expense", back_populates="owner")
-    # savings = relationship("Saving", back_populates="owner")
-    # assumptions = relationship("Assumption", back_populates="owner", uselist=False) # Assuming one set of assumptions per user
+    # Add or update the expenses relationship
+    expenses = relationship("Expense", back_populates="owner", cascade="all, delete-orphan")
+
+    # Add the savings relationship
+    savings = relationship("Saving", back_populates="owner", cascade="all, delete-orphan")
+
+    # Update/Add the assumption relationship for one-to-one
+    assumption = relationship("Assumption", back_populates="owner", uselist=False, cascade="all, delete-orphan")
