@@ -3,7 +3,6 @@ from typing import Optional
 
 class UserBase(BaseModel):
     email: EmailStr
-
     google_id: str
     age: int # Changed to required
 
