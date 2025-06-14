@@ -5,6 +5,7 @@ class UserBase(BaseModel):
     email: EmailStr
     google_id: str
     age: int # Changed to required
+
     start_year: Optional[int] = None
 
 class UserCreate(UserBase):
